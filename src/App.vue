@@ -17,7 +17,10 @@
 			Header,
 			Middle,
 			Footer
-		}
+		},
+		mounted() {
+			this.$store.dispatch("loadingData");
+		},
 	}
 </script>
 
