@@ -1,11 +1,15 @@
 <template>
 	<div class="header flex">
-		<div>
+		<div v-if="!edit">
 			<h1>{{city}}</h1>
 			<div class="location flex">
-				<button>Сменить город</button>
+				<button @click="editText">Сменить город</button>
 				<button>Мое местоположение</button>
 			</div>
+		</div>
+		<div v-else class="edit">
+			<input type="text" v-model="text" @keyup.enter="setCity">
+			<button @click="setCity">OK</button>
 		</div>
 		<div class="flex">
 			<p class="degree-zero">&deg;</p>
@@ -21,6 +25,13 @@
 	export default {
 		name: "Header",
 
+		data() {
+			return {
+				edit: false,
+				text: ""
+			}
+		},
+
 		props: [
 			"isLoading",
 			"city",
@@ -30,6 +41,17 @@
 		methods: {
 			setTypeTemp(type) {
 				this.$store.dispatch("changeTypeTemp", type)
+					.then(() => {
+						this.$store.dispatch("loadingData")
+					});
+			},
+			editText() {
+				this.edit = true;
+				this.text = this.city;
+			},
+			setCity() {
+				this.edit = false;
+				this.$store.dispatch("changeCity", this.text)
 					.then(() => {
 						this.$store.dispatch("loadingData")
 					});
@@ -101,5 +123,24 @@
 	h1 {
 		margin-bottom: 20px;
 		font: 50px normal;
+	}
+
+	.edit {
+		position: relative;
+	}
+
+	.edit input {
+		border: none;
+		border-radius: 8px;
+		padding: 20px;
+		font-size: 30px;
+	}
+
+	.edit button {
+		position: absolute;
+		right: 20px;
+		top: 23%;
+		font-size: 26px;
+		color: #009BFF;
 	}
 </style>

@@ -61,6 +61,9 @@ let store = new Vuex.Store({
 		},
 		changeTempType(state, payload) {
 			state.tempType = payload;
+		},
+		changeCity(state, payload) {
+			state.city = payload;
 		}
 	},
 
@@ -80,8 +83,11 @@ let store = new Vuex.Store({
 				})
 		},
 
-		changeTypeTemp({commit, state}, type) {
+		changeTypeTemp({commit}, type) {
 			commit("changeTempType", type);
+		},
+		changeCity({commit}, city) {
+			commit("changeCity", city);
 		}
 	}
 });
