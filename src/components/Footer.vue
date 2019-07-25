@@ -2,7 +2,7 @@
 	<div class="footer">
 		<div>
 			<p>Ветер</p>
-			<p>{{weather.windSpeed}} м/с</p>
+			<p>{{weather.windSpeed}} {{tempType === 'metric' ? 'м/с' : 'миль/ч'}}</p>
 		</div>
 		<div>
 			<p>Давление</p>
@@ -25,7 +25,8 @@
 
 		props: [
 			'isLoading',
-			'weather'
+			'weather',
+			'tempType'
 		]
 	}
 </script>

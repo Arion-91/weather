@@ -2,7 +2,7 @@
 	<div id="app">
 		<Header :isLoading="isLoading" :city="city" :tempType="tempType"></Header>
 		<Middle :isLoading="isLoading" :weather="weather"></Middle>
-		<Footer :isLoading="isLoading" :weather="weather"></Footer>
+		<Footer :isLoading="isLoading" :weather="weather" :tempType="tempType"></Footer>
 	</div>
 </template>
 
