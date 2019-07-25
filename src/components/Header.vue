@@ -1,7 +1,7 @@
 <template>
 	<div class="header flex">
 		<div>
-			<h1>Омск</h1>
+			<h1>{{city}}</h1>
 			<div class="location flex">
 				<button>Сменить город</button>
 				<button>Мое местоположение</button>
@@ -19,7 +19,12 @@
 
 <script>
 	export default {
-		name: "Header"
+		name: "Header",
+
+		props: [
+			"isLoading",
+			"city"
+		]
 	}
 </script>
 

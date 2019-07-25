@@ -1,8 +1,8 @@
 <template>
 	<div id="app">
-		<Header></Header>
-		<Middle></Middle>
-		<Footer></Footer>
+		<Header :isLoading="isLoading" :city="city"></Header>
+		<Middle :isLoading="isLoading" :weather="weather"></Middle>
+		<Footer :isLoading="isLoading" :weather="weather"></Footer>
 	</div>
 </template>
 
@@ -18,9 +18,22 @@
 			Middle,
 			Footer
 		},
+
 		mounted() {
 			this.$store.dispatch("loadingData");
 		},
+
+		computed: {
+			isLoading() {
+				return this.$store.getters.isLoading;
+			},
+			weather() {
+				return this.$store.getters.getWeather;
+			},
+			city() {
+				return this.$store.getters.getCity;
+			}
+		}
 	}
 </script>
 

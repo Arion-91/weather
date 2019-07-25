@@ -2,26 +2,31 @@
 	<div class="footer">
 		<div>
 			<p>Ветер</p>
-			<p>5 м/с</p>
+			<p>{{weather.windSpeed}} м/с</p>
 		</div>
 		<div>
 			<p>Давление</p>
-			<p>752 мм рт.ст.</p>
+			<p>{{weather.pressure}} мм рт.ст.</p>
 		</div>
 		<div>
 			<p>Влажность</p>
-			<p>60%</p>
+			<p>{{weather.humidity}}%</p>
 		</div>
 		<div>
 			<p>Вероятность дождя</p>
-			<p>10%</p>
+			<p>{{weather.rain}}%</p>
 		</div>
 	</div>
 </template>
 
 <script>
 	export default {
-		name: "Footer"
+		name: "Footer",
+
+		props: [
+			'isLoading',
+			'weather'
+		]
 	}
 </script>
 

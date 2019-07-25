@@ -2,7 +2,7 @@
 	<div class="middle">
 		<div class="degree">
 			<img src="../assets/cloud.png" alt="cloud">
-			<p>19&deg;</p>
+			<p>{{weather.temp}}&deg;</p>
 		</div>
 		<p>Преимущественно солнечно</p>
 	</div>
@@ -10,7 +10,12 @@
 
 <script>
 	export default {
-		name: "Middle"
+		name: "Middle",
+
+		props: [
+			"isLoading",
+			"weather"
+		]
 	}
 </script>
 
