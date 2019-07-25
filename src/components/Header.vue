@@ -4,7 +4,7 @@
 			<h1>{{city}}</h1>
 			<div class="location flex">
 				<button @click="editText">Сменить город</button>
-				<button>Мое местоположение</button>
+				<button @click="getGeolocation">Мое местоположение</button>
 			</div>
 		</div>
 		<div v-else class="edit">
@@ -14,8 +14,12 @@
 		<div class="flex">
 			<p class="degree-zero">&deg;</p>
 			<div class="degree flex">
-				<button :class="[tempType === 'metric' ? 'degree-active degree-active-celsius' : '']" @click="setTypeTemp('metric')">C</button>
-				<button :class="[tempType === 'imperial' ? 'degree-active degree-active-fahrenheit' : '']" @click="setTypeTemp('imperial')">F</button>
+				<button :class="[tempType === 'metric' ? 'degree-active degree-active-celsius' : '']"
+								@click="setTypeTemp('metric')">C
+				</button>
+				<button :class="[tempType === 'imperial' ? 'degree-active degree-active-fahrenheit' : '']"
+								@click="setTypeTemp('imperial')">F
+				</button>
 			</div>
 		</div>
 	</div>
@@ -52,6 +56,15 @@
 			setCity() {
 				this.edit = false;
 				this.$store.dispatch("changeCity", this.text)
+					.then(() => {
+						this.$store.dispatch("loadingData")
+					});
+			},
+			getGeolocation() {
+				/**
+				 * PS: Лайфхак, т.к. нативная геолокация поддерживается только по https
+				 */
+				this.$store.dispatch("changeCity", "Омск")
 					.then(() => {
 						this.$store.dispatch("loadingData")
 					});
