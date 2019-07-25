@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<Header :isLoading="isLoading" :city="city"></Header>
+		<Header :isLoading="isLoading" :city="city" :tempType="tempType"></Header>
 		<Middle :isLoading="isLoading" :weather="weather"></Middle>
 		<Footer :isLoading="isLoading" :weather="weather"></Footer>
 	</div>
@@ -32,6 +32,9 @@
 			},
 			city() {
 				return this.$store.getters.getCity;
+			},
+			tempType() {
+				return this.$store.getters.getTempType;
 			}
 		}
 	}

@@ -10,6 +10,12 @@ let store = new Vuex.Store({
 	state: {
 		isLoading: false,
 		city: 'Омск',
+		/**
+		 * for request api:
+		 * celsius = metric
+		 * fahrenheit = imperial
+		 */
+		tempType: 'metric',
 		weather: {
 			temp: 0,
 			pressure: 0,
@@ -28,6 +34,9 @@ let store = new Vuex.Store({
 		},
 		getCity: state => {
 			return state.city;
+		},
+		getTempType: state => {
+			return state.tempType;
 		}
 	},
 
@@ -49,15 +58,19 @@ let store = new Vuex.Store({
 		},
 		[CHECKOUT_FAILURE](state) {
 			state.isLoading = false;
+		},
+		changeTempType(state, payload) {
+			state.tempType = payload;
 		}
 	},
 
 	actions: {
 		loadingData({commit, state}) {
 			commit(CHECKOUT_REQUEST);
+
 			axios({
 				method: "GET",
-				url: "https://api.openweathermap.org/data/2.5/weather?lang=ru&q=" + state.city + "&APPID=" + keyWeather
+				url: "https://api.openweathermap.org/data/2.5/weather?&lang=ru&q=" + state.city + "&APPID=" + keyWeather + "&units=" + state.tempType
 			})
 				.then(res => {
 					commit(CHECKOUT_SUCCESS, res.data);
@@ -65,6 +78,10 @@ let store = new Vuex.Store({
 				.catch(err => {
 					commit(CHECKOUT_FAILURE, err);
 				})
+		},
+
+		changeTypeTemp({commit, state}, type) {
+			commit("changeTempType", type);
 		}
 	}
 });

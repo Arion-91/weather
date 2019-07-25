@@ -10,8 +10,8 @@
 		<div class="flex">
 			<p class="degree-zero">&deg;</p>
 			<div class="degree flex">
-				<button class="degree-active">C</button>
-				<button>F</button>
+				<button :class="[tempType === 'metric' ? 'degree-active degree-active-celsius' : '']" @click="setTypeTemp('metric')">C</button>
+				<button :class="[tempType === 'imperial' ? 'degree-active degree-active-fahrenheit' : '']" @click="setTypeTemp('imperial')">F</button>
 			</div>
 		</div>
 	</div>
@@ -23,8 +23,18 @@
 
 		props: [
 			"isLoading",
-			"city"
-		]
+			"city",
+			"tempType"
+		],
+
+		methods: {
+			setTypeTemp(type) {
+				this.$store.dispatch("changeTypeTemp", type)
+					.then(() => {
+						this.$store.dispatch("loadingData")
+					});
+			}
+		}
 	}
 </script>
 
@@ -45,6 +55,7 @@
 		color: white;
 		font-size: 18px;
 		opacity: .6;
+		outline: none;
 	}
 
 	.location button:first-child {
@@ -67,11 +78,18 @@
 	}
 
 	.degree-active {
-		border-radius: 15px 0 0 15px;
 		background-color: rgba(255, 255, 255, .2);
 		color: white;
 		font-weight: bold;
 		opacity: 1;
+	}
+
+	.degree-active-celsius {
+		border-radius: 15px 0 0 15px;
+	}
+
+	.degree-active-fahrenheit {
+		border-radius: 0 15px 15px 0;
 	}
 
 	.degree-zero {
