@@ -22,5 +22,16 @@
 </script>
 
 <style>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
 
+	#app {
+		background-color: #498CEC;
+		height: 100vh;
+		width: 100vw;
+		color: white;
+	}
 </style>
