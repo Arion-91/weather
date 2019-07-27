@@ -52,5 +52,8 @@
 		height: 100vh;
 		width: 100vw;
 		color: white;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 </style>

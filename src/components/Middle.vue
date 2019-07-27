@@ -24,11 +24,12 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-bottom: 150px;
+		padding-bottom: 15%;
 	}
 
 	.degree {
 		display: flex;
+		justify-content: center;
 		margin: 20px;
 	}
 
@@ -38,5 +39,34 @@
 
 	p {
 		font-size: 25px;
+	}
+
+	img, p {
+		margin: 5px;
+	}
+
+	@media (max-width: 425px) {
+		.degree {
+			margin: 0;
+		}
+
+		.degree p {
+			font-size: 60px;
+		}
+
+		p {
+			font-size: 18px;
+		}
+
+		img {
+			width: 30%;
+			height: 30%;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.middle {
+			padding: 0;
+		}
 	}
 </style>

@@ -35,8 +35,13 @@
 	.footer {
 		display: flex;
 		justify-content: space-around;
-		margin: 30px;
+		flex-wrap: wrap;
+		margin-bottom: 100px;
 		font-size: 18px;
+	}
+
+	.footer div {
+		margin: 5px;
 	}
 
 	div p:first-child {
@@ -45,5 +50,24 @@
 
 	div p:last-child {
 		font-size: 25px;
+	}
+
+	@media (max-width: 768px) {
+		.footer {
+			display: grid;
+			grid-template-areas: "i i" "i i";
+			width: 100%;
+			/*position: absolute;*/
+			/*bottom: 0;*/
+			margin: 30px 0;
+		}
+
+		.footer div {
+			margin: 10px;
+		}
+
+		div p:last-child {
+			font-size: 20px;
+		}
 	}
 </style>

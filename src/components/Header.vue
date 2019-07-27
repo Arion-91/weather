@@ -1,26 +1,28 @@
 <template>
-	<div class="header flex">
-		<div v-if="!edit">
-			<h1>{{city}}</h1>
-			<div class="location flex">
-				<button @click="editText">Сменить город</button>
-				<button @click="getGeolocation">Мое местоположение</button>
+	<div class="header">
+		<div class="flex flex-jc-sb">
+			<div v-if="!edit">
+				<h1>{{city}}</h1>
+			</div>
+			<div v-else class="edit">
+				<input type="text" v-model="text" @keyup.enter="setCity">
+				<button @click="setCity">OK</button>
+			</div>
+			<div class="flex">
+				<p class="degree-zero">&deg;</p>
+				<div class="degree flex">
+					<button :class="[tempType === 'metric' ? 'degree-active degree-active-celsius' : '']"
+									@click="setTypeTemp('metric')">C
+					</button>
+					<button :class="[tempType === 'imperial' ? 'degree-active degree-active-fahrenheit' : '']"
+									@click="setTypeTemp('imperial')">F
+					</button>
+				</div>
 			</div>
 		</div>
-		<div v-else class="edit">
-			<input type="text" v-model="text" @keyup.enter="setCity">
-			<button @click="setCity">OK</button>
-		</div>
-		<div class="flex">
-			<p class="degree-zero">&deg;</p>
-			<div class="degree flex">
-				<button :class="[tempType === 'metric' ? 'degree-active degree-active-celsius' : '']"
-								@click="setTypeTemp('metric')">C
-				</button>
-				<button :class="[tempType === 'imperial' ? 'degree-active degree-active-fahrenheit' : '']"
-								@click="setTypeTemp('imperial')">F
-				</button>
-			</div>
+		<div class="location flex">
+			<button @click="editText">Сменить город</button>
+			<button @click="getGeolocation">Мое местоположение</button>
 		</div>
 	</div>
 </template>
@@ -76,12 +78,16 @@
 <style scoped>
 	.flex {
 		display: flex;
-		justify-content: space-between;
 		align-content: normal;
+		flex-wrap: wrap;
+	}
+
+	.flex-jc-sb {
+		justify-content: space-between;
 	}
 
 	.header {
-		padding: 80px 75px 80px 100px;
+		padding: 5%;
 	}
 
 	button {
@@ -140,6 +146,7 @@
 
 	.edit {
 		position: relative;
+		margin-bottom: 10px;
 	}
 
 	.edit input {
@@ -152,8 +159,51 @@
 	.edit button {
 		position: absolute;
 		right: 20px;
-		top: 23%;
+		top: 30%;
 		font-size: 26px;
 		color: #009BFF;
+	}
+
+	@media (max-width: 425px) {
+		h1 {
+			font-size: 30px;
+		}
+
+		button {
+			font-size: 15px;
+		}
+
+		.location button:first-child {
+			padding-right: 5px;
+		}
+
+		.location {
+			justify-content: space-between;
+		}
+
+		.edit {
+			width: 100%;
+		}
+
+		.edit input {
+			border: none;
+			border-radius: 8px;
+			padding: 10px;
+			font-size: 25px;
+			width: 100%;
+		}
+
+		.edit button {
+			position: absolute;
+			right: 20px;
+			top: 30%;
+			font-size: 20px;
+			color: #009BFF;
+		}
+
+		.degree-zero {
+			margin: 2px;
+			font-size: 26px;
+		}
 	}
 </style>

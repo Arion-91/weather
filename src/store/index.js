@@ -48,8 +48,7 @@ let store = new Vuex.Store({
 			state.weather.pressure = Math.round(payload.main.pressure / 1.33322);
 			state.weather.humidity = payload.main.humidity;
 			state.weather.windSpeed = payload.wind.speed;
-			// TODO Как посчитать вероятность дождя?
-			state.weather.rain = Math.round(- 0.5 + Math.random() * (100 + 1));
+			state.weather.rain = payload.main.humidity;
 
 			state.weather.temp = payload.main.temp;
 
