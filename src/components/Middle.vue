@@ -1,10 +1,10 @@
 <template>
 	<div class="middle">
 		<div class="degree">
-			<img src="../assets/cloud.png" alt="cloud">
+			<img :src="weather.image" alt="weather">
 			<p>{{weather.temp}}&deg;</p>
 		</div>
-		<p>Преимущественно солнечно</p>
+		<p>{{weather.description}}</p>
 	</div>
 </template>
 

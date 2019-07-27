@@ -51,6 +51,31 @@ let store = new Vuex.Store({
 			state.weather.rain = payload.main.humidity;
 
 			state.weather.temp = payload.main.temp;
+			let description = payload.weather[0].description.split("");
+			description[0] = description[0].toUpperCase();
+			state.weather.description = description.join("");
+
+			let weatherID = payload.weather[0].id.toString().slice(0, 1);
+			let weatherImage = "";
+			switch (weatherID) {
+				case 2:
+					weatherImage = "strom.png";
+					break;
+				case 3:
+				case 5:
+					weatherImage = "rain.png";
+					break;
+				case 7:
+					weatherImage = "cloud.png";
+					break;
+				case 8:
+					weatherImage = "partly cloudy.png";
+					break;
+				default:
+					weatherImage = "sun.png";
+			}
+			weatherImage = payload.weather[0].id === 800 ? "sun.png" : weatherImage;
+			state.weather.image = "" + weatherImage;
 
 			console.log(payload);
 			state.isLoading = false;
