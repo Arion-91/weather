@@ -87,7 +87,7 @@
 	}
 
 	.header {
-		padding: 5%;
+		padding: 5% 5% 0;
 	}
 
 	button {
